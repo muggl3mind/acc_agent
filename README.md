@@ -84,7 +84,7 @@ The system uses **2 sophisticated workflows**, each with **3 specialized sub-age
 #### 🔍 Transaction Categorizer (SequentialAgent)
 | Sub-Agent | Purpose | Key Features |
 |-----------|---------|--------------|
-| **📥 Initialization** | File loading & validation | • Supports CSV/TXT formats<br>• Creates 26-transaction chunks<br>• Validates data integrity |
+| **📥 Initialization** | File loading & validation | • Chart of Accounts: TXT format only<br>• Bank transactions: CSV format with required headers<br>• Creates 26-transaction chunks<br>• Validates data integrity |
 | **⚡ Parallel Processing** | AI-powered categorization | • ThreadPoolExecutor concurrency<br>• Account code validation<br>• Confidence scoring (0.0-1.0) |
 | **🔍 Filtering** | Results analysis | • Low confidence flagging<br>• Account usage statistics<br>• Review recommendations |
 
@@ -98,8 +98,8 @@ The system uses **2 sophisticated workflows**, each with **3 specialized sub-age
 ### The Process Flow
 ```mermaid
 graph TB
-    A[Bank CSV] --> B[📥 Initialize]
-    A2[Chart of Accounts] --> B
+    A[Bank CSV<br/>Required Headers] --> B[📥 Initialize]
+    A2[Chart of Accounts<br/>TXT Format] --> B
     B --> C[⚡ Parallel Process<br/>26-transaction chunks]
     C --> D[🔍 Filter & Analyze]
     D --> E{Confidence Check}
