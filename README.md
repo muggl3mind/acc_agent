@@ -327,7 +327,7 @@ python -m acc_agent.sub_agents.journal_generator.agent
 
 ### Sample Data Included
 - **79 sample transactions** from realistic business scenarios
-- **48 account codes** in comprehensive Chart of Accounts
+- **47 account codes** in comprehensive Chart of Accounts
 - **Multiple transaction types**: Wire transfers, ACH payments, payroll, etc.
 - **Amounts range**: $750 to $300,000 (realistic business transactions)
 
@@ -360,12 +360,6 @@ The system successfully classifies:
 ## 🚧 Future Development
 
 Additional accounting automation features are planned for future releases. The current focus is on perfecting the transaction classification and journal entry generation workflow.
-
----
-
-## 📄 License
-
-MIT License - see [LICENSE](LICENSE) for details.
 
 ---
 
