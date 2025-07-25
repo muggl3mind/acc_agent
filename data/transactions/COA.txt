@@ -1,0 +1,49 @@
+# Chart of Accounts - Text Format
+# Format: CODE: ACCOUNT_NAME
+1000: Cash and Cash Equivalents
+1100: Accounts Receivable
+1200: Inventory
+1300: Prepaid Expenses
+1400: Other Current Assets
+1500: Property Plant & Equipment
+1600: Accumulated Depreciation
+1650: Accumulated Amortization
+1700: Intangible Assets
+1800: Other Non-Current Assets
+2000: Accounts Payable
+2100: Accrued Expenses
+2200: Accrued Payroll
+2300: Short-term Debt
+2400: Deferred Revenue
+2500: Other Current Liabilities
+2600: Long-term Debt
+2700: Other Non-Current Liabilities
+3000: Common Stock
+3100: Preferred Stock
+3200: Additional Paid-in Capital
+3300: PE Capital Contributions
+3400: Retained Earnings
+3500: Current Year Earnings
+4000: Product Revenue
+4100: Service Revenue
+4200: Licensing/Royalty Revenue
+4300: Grant Revenue
+4900: Other Income
+5000: Cost of Goods Sold
+5100: Salaries and Wages Expense
+5200: Benefits and Payroll Tax Expense
+5300: Rent Expense
+5400: Utilities Expense
+5500: Office Expenses
+5600: Software and IT Expense
+5700: Professional Services Expense
+5800: Travel and Entertainment Expense
+5900: Marketing and Advertising Expense
+6000: Research and Development Expense
+6100: Insurance Expense
+6200: Interest Expense
+6300: Depreciation Expense
+6400: Amortization Expense
+6500: PE Management Fees
+6900: Other Expenses
+7000: Income Tax Expense 
