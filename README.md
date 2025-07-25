@@ -2,14 +2,14 @@
 
 > **AI-powered accounting automation that transforms bank transactions into accurate journal entries**
 
-A sophisticated multi-agent system built with Google's Agent Development Kit (ADK) that automates the essential accounting workflow: transaction categorization → journal entries.
+A sophisticated multi-agent system built with Google's Agent Development Kit (ADK) that automates the essential accounting workflow: transaction classification → journal entries.
 
 ---
 
 ## ✨ What It Does
 
-🔄 **Categorizes bank transactions** using AI with confidence scoring  
-📊 **Generates double-entry journal entries** that always balance  
+🔄 **Classifies bank transactions** using AI with confidence scoring  
+📊 **Generates double-entries** that always balance  
 ⚡ **Processes data 3x faster** using parallel processing  
 🎯 **Flags uncertain items** for human review  
 
@@ -43,7 +43,7 @@ adk web
 ### 3. Try It Out
 Update the paths below to match your system location, then copy this prompt into the web interface:
 ```
-Categorize the transactions at 'data/transactions/Sample Bank Export.csv'
+Classify the transactions at 'data/transactions/Sample Bank Export.csv'
 
 The Chart of Account is saved at 'data/transactions/COA.txt'
 
@@ -65,7 +65,7 @@ After the agent completes processing, your journal entries will be saved in:
 - **`journal_entries_journal_YYYYMMDD_HHMMSS_xxxxxxxx.json`** - Detailed report with metadata and summaries
 
 💼 **What to do with the files**:
-- **CSV file**: Contains double-entry journal entries (modifications may be needed for your specific accounting software)
+- **CSV file**: Contains double-entries (modifications may be needed for your specific accounting software)
 - **JSON file**: Review for detailed transaction analysis and confidence scores
 
 ⚠️ **Important Notes**:
@@ -81,17 +81,17 @@ After the agent completes processing, your journal entries will be saved in:
 ### Multi-Agent Architecture
 The system uses **2 sophisticated workflows**, each with **3 specialized sub-agents**:
 
-#### 🔍 Transaction Categorizer (SequentialAgent)
+#### 🔍 Transaction Classifier (SequentialAgent)
 | Sub-Agent | Purpose | Key Features |
 |-----------|---------|--------------|
 | **📥 Initialization** | File loading & validation | • Chart of Accounts: TXT format only<br>• Bank transactions: CSV format with required headers<br>• Creates 26-transaction chunks<br>• Validates data integrity |
-| **⚡ Parallel Processing** | AI-powered categorization | • ThreadPoolExecutor concurrency<br>• Account code validation<br>• Confidence scoring (0.0-1.0) |
+| **⚡ Parallel Processing** | AI-powered classification | • ThreadPoolExecutor concurrency<br>• Account code validation<br>• Confidence scoring (0.0-1.0) |
 | **🔍 Filtering** | Results analysis | • Low confidence flagging<br>• Account usage statistics<br>• Review recommendations |
 
 #### 📝 Journal Generator (SequentialAgent)  
 | Sub-Agent | Purpose | Key Features |
 |-----------|---------|--------------|
-| **📂 Initialization** | Load categorized data | • Finds latest JSONL files<br>• Session state management<br>• Data validation |
+| **📂 Initialization** | Load classified data | • Finds latest JSONL files<br>• Session state management<br>• Data validation |
 | **⚙️ Processing** | Double-entry conversion | • Cash account (1000) handling<br>• Debit/Credit rule application<br>• Balance validation |
 | **💾 Output** | File generation | • CSV for accounting software<br>• JSON with metadata<br>• Account summaries |
 
@@ -126,17 +126,17 @@ accounting-assistant-agent/
 │   ├── 📝 prompt.py                     # System prompts & instructions
 │   ├── 🛠️  tools.py                     # Core utilities (CSV/JSON handling, validation)
 │   └── 🔧 sub_agents/                   # Specialized agent workflows
-│       ├── 📊 categorizer/              # Transaction categorization pipeline
+│       ├── 📊 categorizer/              # Transaction classification pipeline
 │       │   ├── agent.py                 # SequentialAgent coordinator
 │       │   └── subagents/               # 3-stage pipeline
 │       │       ├── initialization/      # File loading & validation
-│       │       ├── parallel_processing/ # Concurrent AI categorization  
+│       │       ├── parallel_processing/ # Concurrent AI classification  
 │       │       └── filtering/           # Confidence analysis & review
 │       └── 📝 journal_generator/        # Journal entry generation pipeline
 │           ├── agent.py                 # SequentialAgent coordinator
 │           ├── tools.py                 # Double-entry bookkeeping logic
 │           └── subagents/               # 3-stage pipeline
-│               ├── initialization/      # Load categorized data
+│               ├── initialization/      # Load classified data
 │               ├── processing/          # Generate balanced entries
 │               └── output/              # Format & save files
 ├── 📊 data/                             # Data directory
@@ -144,8 +144,8 @@ accounting-assistant-agent/
 │   │   ├── COA.txt                     # Chart of Accounts
 │   │   └── Sample*.csv  # Sample bank exports (79 transactions)
 │   └── 📁 output/                       # Generated results
-│       ├── categorization_results_*.jsonl  # Categorized transactions with confidence
-│       ├── journal_entries_*.csv        # Double-entry journal entries  
+│       ├── classification_results_*.jsonl  # Classified transactions with confidence
+│       ├── journal_entries_*.csv        # Double-entries  
 │       └── journal_entries_*.json       # Detailed reports with metadata
 ├── 📋 pyproject.toml                    # Dependencies & project config
 └── 📄 main.py                           # Simple entry point
@@ -168,7 +168,7 @@ Transactions get scored to guide your review:
 
 ### 🔄 Session Management
 - ✅ Resume interrupted workflows
-- ✅ Update categorizations after processing  
+- ✅ Update classifications after processing  
 - ✅ Track all changes with timestamps
 
 ---
@@ -199,12 +199,12 @@ Date,Post Date,Description,Category,Type,Amount,Memo
 1/28/25,1/28/25,PAYMENT - CYBERSECURE INC,Software/Subscriptions,Card Payment,-5000,ANNUAL ENTERPRISE SECURITY SUITE
 ```
 
-### Categorization Output (JSONL)
+### Classification Output (JSONL)
 ```json
 # Metadata header
 {"_metadata": {"session_id": "session_20250722_161458_82ab94d6", "total_transactions": 79}}
 
-# Individual categorized transactions
+# Individual classified transactions
 {"transaction_id": "trans_0", "date": "1/5/25", "amount": 250000, "description": "DEPOSIT - WIRE TRANSFER | CAPITAL CONTRIBUTION", "account_code": "3300", "account_name": "PE Capital Contributions", "confidence": 0.95, "reasoning": "Clear capital contribution from description"}
 {"transaction_id": "trans_1", "date": "1/25/25", "amount": -18550.75, "description": "PAYROLL RUN - GUSTO", "account_code": "5100", "account_name": "Salaries and Wages Expense", "confidence": 0.98, "reasoning": "Obvious payroll expense"}
 ```
@@ -273,7 +273,7 @@ else:  # Money going out
 
 ## 🔧 Advanced Usage
 
-### Update Categorizations
+### Update Classifications
 ```python
 from acc_agent.agent import update_categorization_json
 
@@ -332,7 +332,7 @@ python -m acc_agent.sub_agents.journal_generator.agent
 - **Amounts range**: $750 to $300,000 (realistic business transactions)
 
 ### Supported Transaction Types
-The system successfully categorizes:
+The system successfully classifies:
 - 💰 **Capital contributions** → Equity accounts (3000-3900)
 - 💳 **Payroll expenses** → Salary & wage accounts (5100-5200)  
 - 🏢 **Operating expenses** → Various expense accounts (5000-6900)
@@ -359,7 +359,7 @@ The system successfully categorizes:
 
 ## 🚧 Future Development
 
-Additional accounting automation features are planned for future releases. The current focus is on perfecting the transaction categorization and journal entry generation workflow.
+Additional accounting automation features are planned for future releases. The current focus is on perfecting the transaction classification and journal entry generation workflow.
 
 ---
 
