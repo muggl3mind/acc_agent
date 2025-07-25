@@ -16,6 +16,8 @@ def initialize_journal_session(tool_context) -> Dict[str, Any]:
     This is used by the Journal InitializationAgent.
     """
     try:
+        print(f"🔍 JOURNAL INIT DEBUG: Starting initialization")
+        
         # Look for the most recent categorization file
         pattern = "data/output/categorization_results_session_*.jsonl"
         files = glob.glob(pattern)
@@ -30,6 +32,9 @@ def initialize_journal_session(tool_context) -> Dict[str, Any]:
         categorization_file = max(files, key=os.path.getctime)
         filename = os.path.basename(categorization_file)
         categorization_session_id = filename.replace("categorization_results_", "").replace(".jsonl", "")
+        
+        print(f"🔍 JOURNAL INIT DEBUG: Using categorization file: {categorization_file}")
+        print(f"🔍 JOURNAL INIT DEBUG: Extracted categorization session ID: {categorization_session_id}")
         
         # Read categorized transactions from JSONL file
         categorized_transactions = []
@@ -60,14 +65,18 @@ def initialize_journal_session(tool_context) -> Dict[str, Any]:
                 "error": "No categorized transactions found in file"
             }
         
+        print(f"🔍 JOURNAL INIT DEBUG: Loaded {len(categorized_transactions)} transactions")
+        
         # Create journal session ID
         journal_session_id = f"journal_{datetime.now().strftime('%Y%m%d_%H%M%S')}_{str(uuid.uuid4())[:8]}"
+        print(f"🔍 JOURNAL INIT DEBUG: Created journal session ID: {journal_session_id}")
         
         # Create output directory
         output_dir = "data/output"
         os.makedirs(output_dir, exist_ok=True)
         
         # Store in session state
+        print(f"🔍 JOURNAL INIT DEBUG: Storing data in session state...")
         tool_context.state["journal.session_id"] = journal_session_id
         tool_context.state["journal.categorized_transactions"] = categorized_transactions
         tool_context.state["journal.categorization_session_id"] = categorization_session_id
@@ -76,6 +85,13 @@ def initialize_journal_session(tool_context) -> Dict[str, Any]:
         tool_context.state["journal.created_at"] = datetime.now().isoformat()
         tool_context.state["journal.categorization_file"] = categorization_file
         tool_context.state["journal.metadata"] = metadata
+        
+        # Verify session state was actually stored
+        print(f"🔍 JOURNAL INIT DEBUG: Verifying session state storage...")
+        stored_session_id = tool_context.state.get("journal.session_id")
+        stored_transactions_count = len(tool_context.state.get("journal.categorized_transactions", []))
+        print(f"🔍 JOURNAL INIT DEBUG: Verified - journal.session_id: {stored_session_id}")
+        print(f"🔍 JOURNAL INIT DEBUG: Verified - transactions count: {stored_transactions_count}")
         
         return {
             "status": "success",
@@ -87,6 +103,7 @@ def initialize_journal_session(tool_context) -> Dict[str, Any]:
         }
         
     except Exception as e:
+        print(f"🔍 JOURNAL INIT DEBUG: Exception occurred: {str(e)}")
         return {
             "status": "error",
             "error": str(e)
