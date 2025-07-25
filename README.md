@@ -1,6 +1,6 @@
 # 🧾 Accounting Assistant Agent
 
-> **AI-powered accounting automation that transforms bank transactions into complete financial statements**
+> **AI-powered accounting automation that transforms bank transactions into accurate journal entries**
 
 A sophisticated multi-agent system built with Google's Agent Development Kit (ADK) that automates the essential accounting workflow: transaction categorization → journal entries.
 
@@ -357,10 +357,9 @@ The system successfully categorizes:
 
 ---
 
-## 🚧 Coming Soon
+## 🚧 Future Development
 
-- [ ] 📊 Trial Balance Generator Agent
-- [ ] 📈 Financial Statement Generator Agent
+Additional accounting automation features are planned for future releases. The current focus is on perfecting the transaction categorization and journal entry generation workflow.
 
 ---
 
