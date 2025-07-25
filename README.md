@@ -373,4 +373,4 @@ MIT License - see [LICENSE](LICENSE) for details.
 <p align="center">
   <strong>Built with ❤️ using Google's Agent Development Kit</strong><br>
   <em>Transforming accounting workflows with AI</em>
-</p> 
+</p>
