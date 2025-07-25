@@ -8,8 +8,8 @@ A sophisticated multi-agent system built with Google's Agent Development Kit (AD
 
 ## ✨ What It Does
 
-🔄 **Classifies bank transactions** using AI with confidence scoring  
-📊 **Generates double-entries** that always balance  
+🔄 **Maps transactions to chart of accounts** using AI with confidence scoring  
+📊 **Generates journal entries** that always balance  
 ⚡ **Processes data 3x faster** using parallel processing  
 🎯 **Flags uncertain items** for human review  
 
@@ -65,7 +65,7 @@ After the agent completes processing, your journal entries will be saved in:
 - **`journal_entries_journal_YYYYMMDD_HHMMSS_xxxxxxxx.json`** - Detailed report with metadata and summaries
 
 💼 **What to do with the files**:
-- **CSV file**: Contains double-entries (modifications may be needed for your specific accounting software)
+- **CSV file**: Contains journal entries (modifications may be needed for your specific accounting software)
 - **JSON file**: Review for detailed transaction analysis and confidence scores
 
 ⚠️ **Important Notes**:
@@ -145,7 +145,7 @@ accounting-assistant-agent/
 │   │   └── Sample*.csv  # Sample bank exports (79 transactions)
 │   └── 📁 output/                       # Generated results
 │       ├── classification_results_*.jsonl  # Classified transactions with confidence
-│       ├── journal_entries_*.csv        # Double-entries  
+│       ├── journal_entries_*.csv        # Journal entries  
 │       └── journal_entries_*.json       # Detailed reports with metadata
 ├── 📋 pyproject.toml                    # Dependencies & project config
 └── 📄 main.py                           # Simple entry point
